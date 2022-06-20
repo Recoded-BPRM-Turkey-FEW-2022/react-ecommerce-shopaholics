@@ -1,22 +1,68 @@
-import React from 'react'
-import { Grid } from "@mui/material"
-import ProductCard from "../components/ProductCard"
+import { useQuery } from 'react-query';
+import { Grid, Container } from '@mui/material';
+import ProductCard from '../components/ProductCard';
 
-const products = [
-    {id: 1, name: "Shoes", description: "Running Shoes.", price: "$5"},
-    {id: 2, name: "Macbook", description: "Apple MacBook.", price: "$10"}
-]
+export default function AllProducts () {
+    const fetchProducts = async () => {
+        const response = await fetch('https://fakestoreapi.com/products');
+        return response.json();
+    };
+    
+    const {data, status} = useQuery("products", fetchProducts)
 
-const AllProducts = () => {
-    <main>
-        <Grid container justify="center" spacing={4}>
-            {products.map(product => {
-                <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <ProductCard product={product} />
-                </Grid>
-            })}
-        </Grid>
-    </main>
+    if (status === "loading") {
+        return <div>Loading...</div>
+    }
+
+    if (status === "error") {
+        return <div>Error</div>
+    }
+
+    return (
+        <Container>
+            <Grid container spacing={5} margin={4}>
+                {data.map(product => {
+                    return (
+                        <Grid item key={product.id} >
+                            <ProductCard product={product} />
+                        </Grid>
+                    )
+                })};
+            </Grid>
+        </Container>
+    )
 }
 
-export default AllProducts;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export default function AllProducts () {
+//         <Grid container justify="center" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+//             {products.map(product => {
+//                 <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+//                     <ProductCard product={product} />
+//                 </Grid>
+//             })}
+//         </Grid>
+// }
