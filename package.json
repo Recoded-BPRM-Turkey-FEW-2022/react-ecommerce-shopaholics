@@ -9,7 +9,8 @@
     "@mui/material": "^5.8.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-query": "^3.39.1"
+    "react-query": "^3.39.1",
+    "react-router-dom": "^6.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,61 +1,46 @@
-import { useQuery } from 'react-query';
-import { Grid, Container } from '@mui/material';
-import ProductCard from '../components/ProductCard';
+import { useQuery } from "react-query";
+import { Grid, Container } from "@mui/material";
+import ProductCard from "../components/ProductCard";
+import { Link } from "react-router-dom";
 
-export default function AllProducts () {
-    const fetchProducts = async () => {
-        const response = await fetch('https://fakestoreapi.com/products');
-        return response.json();
-    };
-    
-    const {data, status} = useQuery("products", fetchProducts)
+export default function AllProducts() {
+  const fetchProducts = async () => {
+    const response = await fetch("https://fakestoreapi.com/products");
+    return response.json();
+  };
 
-    if (status === "loading") {
-        return <div>Loading...</div>
-    }
+  const { data, status } = useQuery("products", fetchProducts);
 
-    if (status === "error") {
-        return <div>Error</div>
-    }
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
-    return (
-        <Container>
-            <Grid container spacing={5} margin={4}>
-                {data.map(product => {
-                    return (
-                        <Grid item key={product.id} >
-                            <ProductCard product={product} />
-                        </Grid>
-                    )
-                })};
+  if (status === "error") {
+    return <div>Error</div>;
+  }
+
+  return (
+    <Container>
+      <Grid container spacing={5} margin={4}>
+        {data.map((product) => {
+          return (
+            <Grid item key={product.id}>
+              <Link
+                to={{
+                  pathname: `/products/${product.id}`,
+                  state: product,
+                }}
+              >
+                <ProductCard product={product} />
+              </Link>
             </Grid>
-        </Container>
-    )
+          );
+        })}
+        ;
+      </Grid>
+    </Container>
+  );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // export default function AllProducts () {
 //         <Grid container justify="center" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -66,3 +51,13 @@ export default function AllProducts () {
 //             })}
 //         </Grid>
 // }
+
+// LINK STUFF
+{
+  /* <Link
+to={{
+  pathname: `/product/${product.id}`,
+  state: product,
+}}
+> */
+}
