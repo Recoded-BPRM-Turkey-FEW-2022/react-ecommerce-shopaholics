@@ -1,14 +1,10 @@
-import { useQuery } from 'react-query';
+import { getProducts } from '../util/API';
+// import { QueryCache } from 'react-query'
 import { Grid, Container } from '@mui/material';
 import ProductCard from '../components/ProductCard';
 
 export default function AllProducts () {
-    const fetchProducts = async () => {
-        const response = await fetch('https://fakestoreapi.com/products');
-        return response.json();
-    };
-    
-    const {data, status} = useQuery("products", fetchProducts)
+    const {status, data} = getProducts();
 
     if (status === "loading") {
         return <div>Loading...</div>
@@ -24,10 +20,10 @@ export default function AllProducts () {
                 {data.map(product => {
                     return (
                         <Grid item key={product.id} >
-                            <ProductCard product={product} />
+                            <ProductCard product={product}  />
                         </Grid>
                     )
-                })};
+                })}
             </Grid>
         </Container>
     )
