@@ -29,7 +29,6 @@ export default function ProductDetail({ products }) {
           );
         }
         let actualData = await response.json();
-        console.log(actualData);
         setData(actualData);
         setError(null);
       } catch (err) {
@@ -64,7 +63,6 @@ export default function ProductDetail({ products }) {
         })
       );
   }
-  console.log(productId);
 
   return (
     <Card
