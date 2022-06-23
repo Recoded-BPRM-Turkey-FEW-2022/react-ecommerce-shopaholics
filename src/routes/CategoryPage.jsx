@@ -1,24 +1,25 @@
-import { getProducts } from '../util/API';
+// import { getProductsByCategory } from '../util/API';
 import { Grid, Container } from '@mui/material';
 import ProductCard from '../components/ProductCard';
 import { Link } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-export default function AllProducts ({searchedName}) {
-    const {status, data} = getProducts();
+function CategoryPage ({category}) {
+    // const { categoryName } = useParams();
+    const [products, setProducts] = useState([]);
+    // const {status, data} = getProductsByCategory(categoryName);
+    
+    useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/category/${category}`)
+    .then(response => response.json())
+    .then(data => setProducts(data));
+  },[])
 
-    if (status === "loading") {
-        return <div>Loading...</div>
-    }
-
-    if (status === "error") {
-        return <div>Error</div>
-    }
-
-  // IF THINGS DONT WORK, DONT FORGET TO CHANGE searchedName.map
   return (
     <Container>
       <Grid container spacing={5} margin={4}>
-        {searchedName && searchedName.map((product) => {
+        {products.map((product) => {
           return (
             <Grid item key={product.id}>
               <Link
@@ -39,6 +40,6 @@ export default function AllProducts ({searchedName}) {
   );
 }
 
-
+export default CategoryPage;
 
   

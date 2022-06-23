@@ -50,7 +50,6 @@ const Search = styled('div')(({ theme }) => ({
   
 
 export default function SearchBar ({placeholder, searchedName, setSearchedName, data}) {
-    console.log(searchedName); //undefined at first, but when there is input in the search bar, it shows the input
     
     function filterByName (event) {
       let f = data.filter(d => d.title.toLowerCase().includes(event.target.value.toLowerCase()));
