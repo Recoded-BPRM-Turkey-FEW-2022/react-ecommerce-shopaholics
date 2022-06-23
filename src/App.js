@@ -1,5 +1,5 @@
-import { QueryClientProvider, QueryClient } from "react-query";
-import { useEffect } from "react";
+// import { QueryClientProvider, QueryClient } from "react-query";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,7 +13,7 @@ import ProductDetail from "./routes/ProductDetail";
 import {getProducts} from "./util/API";
 
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 function App() {
   const {status, data} = getProducts() //CHECK IF THIS IS REFETCHING OR JUST BRINGING CACHED DATA
@@ -24,7 +24,8 @@ function App() {
   }, [data])
 
   return (
-    <QueryClientProvider client={queryClient}>
+  //  <QueryClientProvider client={queryClient}>
+    <>
       <ResponsiveAppBar
         searchedName={searchedName}
         setSearchedName={setSearchedName}
@@ -48,7 +49,8 @@ function App() {
           />
         </Routes>
       </Router>
-    </QueryClientProvider>
+    {/* </QueryClientProvider> */}
+    </>
   );
 }
 

@@ -18,7 +18,7 @@ export default function AllProducts ({searchedName}) {
   return (
     <Container>
       <Grid container spacing={5} margin={4}>
-        {searchedName.map((product) => {
+        {searchedName && searchedName.map((product) => {
           return (
             <Grid item key={product.id}>
               <Link
