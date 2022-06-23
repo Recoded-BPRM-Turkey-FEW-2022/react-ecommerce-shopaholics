@@ -1,5 +1,6 @@
 import { getProducts } from '../util/API';
 import React, {useState} from 'react';
+// import { useQuery } from 'react-query';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -34,7 +35,6 @@ const Search = styled('div')(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -49,20 +49,13 @@ const Search = styled('div')(({ theme }) => ({
   // SEARCH BAR STYLING ENDS HERE
   
 
-export default function SearchBar ({placeholder}) {
-    const {status, data} = getProducts(); //CHECK IF THIS IS REFETCHING OR JUST BRINGING CACHED DATA
-    console.log(data);
-    const [searchedName, setSearchedName] = useState(data) // NOT SURE
+export default function SearchBar ({placeholder, searchedName, setSearchedName, data}) {
+    console.log(searchedName); //undefined at first, but when there is input in the search bar, it shows the input
     
     function filterByName (event) {
-      setSearchedName(event.target.value);
+      let f = data.filter(d => d.title.toLowerCase().includes(event.target.value.toLowerCase()));
+      setSearchedName(f);
     }
-
-    const productsToDisplay = data.filter((d) => {
-      if (searchedName === data) return true;
-
-      return d.title === searchedName;
-    })
 
   return (
     <Search>
