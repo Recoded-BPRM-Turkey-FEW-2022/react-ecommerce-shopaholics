@@ -11,12 +11,19 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function ProductDetail({ products }) {
   const { productId } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const amnt = (min, max) => (v) => v <= min ? min : v >= max ? max : v;
+  const amntV = amnt(1, 10);
+  const [amount, setAmount] = useState(1);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -29,6 +36,7 @@ export default function ProductDetail({ products }) {
           );
         }
         let actualData = await response.json();
+        console.log(actualData);
         setData(actualData);
         setError(null);
       } catch (err) {
@@ -53,6 +61,7 @@ export default function ProductDetail({ products }) {
         category: data.category,
         image: data.image,
         rating: data.rating,
+        amount: amount,
       }),
     };
     fetch("http://localhost:3000/posts", requestOptions)
@@ -63,6 +72,7 @@ export default function ProductDetail({ products }) {
         })
       );
   }
+  console.log(productId);
 
   return (
     <Card
@@ -71,6 +81,7 @@ export default function ProductDetail({ products }) {
         border: "none",
         boxShadow: "none",
         justifyContent: "center",
+        marginTop: "50px",
         marginTop: "50px",
       }}
     >
@@ -90,17 +101,60 @@ export default function ProductDetail({ products }) {
             variant="subtitle2"
             color="text.secondary"
             component="div"
+            fontSize="30px"
           >
             ${data.price}
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              pl: 1,
+              pb: 1,
+              marginRight: "50px",
+              marginTop: "50px",
+            }}
+          >
+            {data.description}
+          </Box>
         </CardContent>
-        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-          {data.description}
+        <Box display="flex" margin="10px">
+          <IconButton
+            sx={{
+              width: "8%",
+              borderRadius: 0,
+              backgroundColor: "lightblue",
+            }}
+            onClick={() => setAmount(amntV(amount - 1))}
+          >
+            <RemoveIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            sx={{
+              border: `1px solid lightblue`,
+              p: 1,
+              fontSize: "16px",
+            }}
+          >
+            {amount}
+          </Typography>
+          <IconButton
+            sx={{
+              width: "8%",
+              borderRadius: 0,
+              backgroundColor: "lightblue",
+            }}
+            onClick={() => setAmount(amntV(amount + 1))}
+          >
+            <AddIcon />
+          </IconButton>
         </Box>
         <CardActions>
           <Button
             variant="contained"
             aria-label="add to cart"
+            margin="10px"
             onClick={handleClick}
           >
             <AddShoppingCartIcon sx={{ padding: "3px" }} />
@@ -115,7 +169,7 @@ export default function ProductDetail({ products }) {
           display: "flex",
           justifyContent: "flex-end",
           borderRadius: "5px",
-          maxWidth: "300px",
+          maxWidth: "400px",
         }}
         image={`${data.image}`}
         alt="No image"
