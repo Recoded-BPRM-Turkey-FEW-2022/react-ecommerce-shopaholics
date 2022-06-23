@@ -29,7 +29,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Shopaholics
           </Typography>
-          <SearchBar placeholder="Type something" /> // HERE IS THE SEARCH BAR COMPONENT
+          <SearchBar placeholder="Type something" /> 
         </Toolbar>
       </AppBar>
     </Box>

@@ -23,19 +23,21 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ResponsiveAppBar />
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<AllProducts />} />
-          <Route
-            exact
-            path="/products/:productId"
-            element={<ProductDetail />}
-          />
-        </Routes>
-      </Router>
-    </QueryClientProvider>
+    
+    // <QueryClientProvider client={queryClient}>
+    //   <ResponsiveAppBar />
+    //   <Router>
+    //     <Routes>
+    //       <Route exact path="/" element={<AllProducts />} />
+    //       <Route
+    //         exact
+    //         path="/products/:productId"
+    //         element={<ProductDetail />}
+    //       />
+    //     </Routes>
+    //   </Router>
+    // </QueryClientProvider>
+    <div>hey</div>
   );
 }
 
