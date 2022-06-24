@@ -22,6 +22,8 @@ function App() {
 
   return (
     <>
+          <Router>
+
       <ResponsiveAppBar
         searchedName={searchedName}
         setSearchedName={setSearchedName}
@@ -29,7 +31,6 @@ function App() {
         category={category}
         setCategory={setCategory}
       />
-      <Router>
         <Routes>
           <Route
             exact

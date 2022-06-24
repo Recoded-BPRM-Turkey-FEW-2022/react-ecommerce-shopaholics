@@ -14,7 +14,7 @@ function CategoryPage ({category}) {
     fetch(`https://fakestoreapi.com/products/category/${category}`)
     .then(response => response.json())
     .then(data => setProducts(data));
-  },[])
+  },[products]) //I ADDED products HERE
 
   return (
     <Container>
@@ -32,7 +32,7 @@ function CategoryPage ({category}) {
               </Link>
 
             </Grid>
-          );
+          )
         })};
       </Grid>
     </Container>
