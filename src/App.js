@@ -8,6 +8,8 @@ import ResponsiveAppBar from "./components/Navbar";
 import AllProducts from "./routes/AllProducts";
 import ProductDetail from "./routes/ProductDetail";
 import {getProducts} from "./util/API";
+import Cart from "./routes/Cart"
+// const queryClient = new QueryClient();
 import CategoryPage from "./routes/CategoryPage";
 
 function App() {
@@ -45,6 +47,10 @@ function App() {
           />
           <Route
             exact
+            path="/cart"
+            element={<Cart />}
+            />
+          <Route
             path="/products/category/:categoryName"
             element={
             <CategoryPage

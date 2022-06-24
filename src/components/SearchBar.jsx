@@ -46,7 +46,6 @@ const Search = styled('div')(({ theme }) => ({
   }));
   // SEARCH BAR STYLING ENDS HERE
   
-
 export default function SearchBar ({placeholder, setSearchedName, data}) {
     
     function filterByName (event) {
