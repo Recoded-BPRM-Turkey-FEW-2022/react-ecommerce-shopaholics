@@ -14,23 +14,20 @@ function App() {
   const {status, data} = getProducts() //CHECK IF THIS IS REFETCHING OR JUST BRINGING CACHED DATA
   const [searchedName, setSearchedName] = useState(data)
   const [category, setCategory] = useState('');
-  console.log(category);
 
   useEffect(() => {
     setSearchedName(data)
   }, [data])
 
   return (
-    <>
-          <Router>
-
-      <ResponsiveAppBar
-        searchedName={searchedName}
-        setSearchedName={setSearchedName}
-        data={data}
-        category={category}
-        setCategory={setCategory}
-      />
+      <Router>
+        <ResponsiveAppBar
+          searchedName={searchedName}
+          setSearchedName={setSearchedName}
+          data={data}
+          category={category}
+          setCategory={setCategory}
+        />
         <Routes>
           <Route
             exact
@@ -54,10 +51,8 @@ function App() {
               category={category}
             />}
           />
-
         </Routes>
       </Router>
-    </>
   );
 }
 

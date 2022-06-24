@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,12 +8,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
 
-
 export default function ButtonAppBar({searchedName, setSearchedName, data, category, setCategory}) {
 
   function filterByCategory(value) {
     setCategory(value.toLowerCase()); // this returns undefined
-    console.log(category);
     
   }
   return (
