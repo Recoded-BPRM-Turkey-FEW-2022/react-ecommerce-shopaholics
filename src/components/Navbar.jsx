@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchBar from './SearchBar';
 import { Outlet, Link } from "react-router-dom";
-
+import Typography from "@mui/material/Typography";
 
 export default function ButtonAppBar({searchedName, setSearchedName, data, category, setCategory}) {
   function filterByCategory(value) {

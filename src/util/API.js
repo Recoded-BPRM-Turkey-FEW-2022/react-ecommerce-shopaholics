@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 
 async function fetchProducts () {
-        const response = await fetch('https://fakestoreapi.com/products');
+        const response = await fetch('https://sleepy-hollows-09914.herokuapp.com/products');
         return response.json();
     };
 

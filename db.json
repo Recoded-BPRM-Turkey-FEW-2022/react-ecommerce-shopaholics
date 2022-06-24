@@ -2,16 +2,15 @@
   "posts": [
     {
       "id": 1,
-      "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-      "price": 109.95,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "category": "men's clothing",
-      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-      "rating": {
-        "rate": 3.9,
-        "count": 120
+      "title": "Goodthreads Men's Soft Cotton Short-Sleeve Crewneck Pocket T-Shirt",
+      "price": 12315.5,
+      "description": "Goodthreads' collection of men's clothing crafted with care takes wear-everywhere apparel to the next level. Create can't-miss pairings with long- and short-sleeve button-down shirts in standard and slim fits, plus chino pants and shorts made from wrinkle-free non-iron fabric. With these classics-and T-shirts, polo shirts, and outerwear to round out your look-Goodthreads is your go-to for wardrobe staples with the style you want.",
+      "image": "https://m.media-amazon.com/images/I/81xCIO8k+OL._AC_UX522_.jpg",
+      "ratin": {
+        "rate": 4.5,
+        "count": 2811
       },
-      "amount": 1
+      "amount": 2
     }
   ]
 }

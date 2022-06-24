@@ -84,7 +84,7 @@ return (
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-              ${item.price}
+              ${item.price * item.amount}
             </Typography>
           </Grid>
         </Grid>

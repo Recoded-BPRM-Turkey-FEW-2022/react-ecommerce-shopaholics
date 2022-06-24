@@ -32,7 +32,7 @@ export default function ProductDetail({ products }) {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://fakestoreapi.com/products/${productId}`
+          `https://sleepy-hollows-09914.herokuapp.com/products/${productId}`
         );
         if (!response.ok) {
           throw new Error(
@@ -65,7 +65,7 @@ export default function ProductDetail({ products }) {
         description: data.description,
         category: data.category,
         image: data.image,
-        rating: data.rating,
+        ratin: data.ratin,
         amount: amount,
       }),
     };
@@ -82,8 +82,8 @@ export default function ProductDetail({ products }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setRates(data.rating.rate);
-      setCount(data.rating.count);
+      setRates(data.ratin.rate);
+      setCount(data.ratin.count);
     }, 1000);
   });
 

@@ -7,9 +7,9 @@ function CategoryPage ({category}) {
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/category/${category}`)
+    fetch(`https://sleepy-hollows-09914.herokuapp.com/category/${category}`)
     .then(response => response.json())
-    .then(data => setProducts(data));
+    .then(data => setProducts(data.data));
   },[products])
 
   return (
@@ -20,7 +20,7 @@ function CategoryPage ({category}) {
             <Grid item key={product.id}>
               <Link
                 to={{
-                  pathname: `/products/${product.id}`,
+                  pathname: `/${product.id}`,
                   state: product,
                 }}
               >
