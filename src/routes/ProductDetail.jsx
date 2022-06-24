@@ -41,7 +41,7 @@ export default function ProductDetail({ products }) {
         }
         setIsLoading(false);
         let actualData = await response.json();
-        console.log(actualData);
+        // console.log(actualData);
         setData(actualData);
         setError(null);
       } catch (err) {
@@ -78,7 +78,6 @@ export default function ProductDetail({ products }) {
       );
   }
   // console.log(productId);
-
   // console.log(data);
 
   useEffect(() => {

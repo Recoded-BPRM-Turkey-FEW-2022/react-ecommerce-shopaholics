@@ -1,6 +1,4 @@
-import { getProducts } from '../util/API';
-import React, {useState} from 'react';
-// import { useQuery } from 'react-query';
+import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -49,8 +47,7 @@ const Search = styled('div')(({ theme }) => ({
   // SEARCH BAR STYLING ENDS HERE
   
 
-export default function SearchBar ({placeholder, searchedName, setSearchedName, data}) {
-    console.log(searchedName); //undefined at first, but when there is input in the search bar, it shows the input
+export default function SearchBar ({placeholder, setSearchedName, data}) {
     
     function filterByName (event) {
       let f = data.filter(d => d.title.toLowerCase().includes(event.target.value.toLowerCase()));
