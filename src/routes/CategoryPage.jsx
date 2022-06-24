@@ -1,23 +1,21 @@
-import { getProducts } from '../util/API';
 import { Grid, Container } from '@mui/material';
 import ProductCard from '../components/ProductCard';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-export default function AllProducts ({searchedName}) {
-    const {status, data} = getProducts();
-
-    if (status === "loading") {
-        return <div>Loading...</div>
-    }
-
-    if (status === "error") {
-        return <div>Error</div>
-    }
+function CategoryPage ({category}) {
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/category/${category}`)
+    .then(response => response.json())
+    .then(data => setProducts(data));
+  },[products])
 
   return (
     <Container>
       <Grid container spacing={5} margin={4}>
-        {searchedName && searchedName.map((product) => {
+        {products.map((product) => {
           return (
             <Grid item key={product.id}>
               <Link
@@ -31,12 +29,12 @@ export default function AllProducts ({searchedName}) {
 
             </Grid>
           )
-        })}
+        })};
       </Grid>
     </Container>
   );
 }
 
-
+export default CategoryPage;
 
   
