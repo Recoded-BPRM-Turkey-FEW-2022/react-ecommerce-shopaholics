@@ -1,10 +1,7 @@
-// import { QueryClientProvider, QueryClient } from "react-query";
 import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  NavLink,
   Routes,
 } from "react-router-dom";
 import ResponsiveAppBar from "./components/Navbar";
@@ -13,21 +10,17 @@ import ProductDetail from "./routes/ProductDetail";
 import {getProducts} from "./util/API";
 import CategoryPage from "./routes/CategoryPage";
 
-
-// const queryClient = new QueryClient();
-
 function App() {
   const {status, data} = getProducts() //CHECK IF THIS IS REFETCHING OR JUST BRINGING CACHED DATA
-  const [searchedName, setSearchedName] = useState(data) // NOT SURE
+  const [searchedName, setSearchedName] = useState(data)
   const [category, setCategory] = useState('');
-
+  console.log(category);
 
   useEffect(() => {
     setSearchedName(data)
   }, [data])
 
   return (
-  //  <QueryClientProvider client={queryClient}>
     <>
       <ResponsiveAppBar
         searchedName={searchedName}
@@ -63,7 +56,6 @@ function App() {
 
         </Routes>
       </Router>
-    {/* </QueryClientProvider> */}
     </>
   );
 }

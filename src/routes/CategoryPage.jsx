@@ -33,8 +33,7 @@ function CategoryPage ({category}) {
 
             </Grid>
           );
-        })}
-        ;
+        })};
       </Grid>
     </Container>
   );

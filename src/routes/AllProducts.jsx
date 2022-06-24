@@ -1,9 +1,11 @@
 import { getProducts } from '../util/API';
 import { Grid, Container } from '@mui/material';
 import ProductCard from '../components/ProductCard';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function AllProducts ({searchedName}) {
+    // const location = useLocation();
+    // console.log(location);
     const {status, data} = getProducts();
 
     if (status === "loading") {
