@@ -1,116 +1,98 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { posts } from "../../db.json"
 
+import { useQuery, useMutation, QueryClient, useQueryClient } from "react-query";
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import ButtonBase from '@mui/material/ButtonBase';
 
-export default function BasicCard() {
-    const sum = posts.reduce((acc, curr) => acc+curr);
-    const noOfItems = posts.length;
-    return (
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Typography variant="h6">
-            You have {noOfItems} items
-            <br />
-            ${sum}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Proceed to Checkout</Button>
-        </CardActions>
-      </Card>
-    );
-  }
 
 
 export default function MediaCard() {
+// const [cart, setCart] = useState([0]);
+const {data, isLoading} = useQuery('cart', ()=> {
+  return fetch('http://localhost:3000/posts').then((data)=> data.json());
+});
+
+const queryClient = useQueryClient()
+
+queryClient.invalidateQueries()
+
+//hadnle delete:
+const deleteData = useMutation( (id) => {
+  return fetch(`http://localhost:3000/posts/${id}`, {
+    method: "DELETE",
+  });
+}, {
+  onSuccess: ()=> {
+    queryClient.invalidateQueries
+  }
+})
+if (isLoading) return "Loading...";
 
 
-    const [cart, setCart] = useState([]);
 
-    useEffect(() => {
-      fetch('http://localhost:3000/posts')
-        .then(res => res.json())
-        .then(data => setCart(data))
-    }, [])
-  
-    const handleDelete = async (id) => {
-      await fetch('http://localhost:3000/posts/' + id, {
-        method: 'DELETE'
-      })
-      const updatedCart = cart.filter(item => item.id != id)
-      setCart(updatedCart)
-    }
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
+
+return (
+<div>
 
 
-<BasicCard />
+  {data.map((item)=> {
+    return (
 
+<Paper
+      sx={{
+        pt: 8,
+        margin: 'auto',
+        maxWidth: 700,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}
+    >
+      <Grid container spacing={4} sx={{p:5}} >
+        <Grid item>
+          <ButtonBase sx={{ width: 128, height: 128 }}>
+            <Img alt={item.title} src={item.image} />
+          </ButtonBase>
+        </Grid>
+        <Grid item xs={12} sm container>
+          <Grid item xs container direction="column" spacing={2}>
+            <Grid item xs>
+              <Typography gutterBottom variant="subtitle1" component="div">
+                {item.title}
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {item.amount} is added
+              </Typography>
+            </Grid>
+            <Grid item>
+            <Button onClick={()=> deleteData.mutate(item.id)}>Remove</Button>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography variant="subtitle1" component="div">
+              ${item.price}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Paper>
 
-
-    // change age to qty later:
-  const [age, setAge] = React.useState("");
-
-// handles change of quantity :
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  return (
-    // posts is the data coming from the db.json:
-    posts.map( (item) => {
-        return (
-            <Card sx={{ maxWidth: 260  }}>
-      <CardMedia 
-        key = {item.id}
-        component="img"
-        height=""
-        image= {item.image}
-        alt= {item.title}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          {item}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Box sx={{ minWidth: 130 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Change Qty
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Change Quantity"
-              onChange={handleChange}
-            >
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-
-        <Button onClick={handleDelete} sx={{ ml: "1rem" }} variant="contained" size="large">
-          Delete
-        </Button>
-      </CardActions>
-    </Card>
-        )
-    })
+    )
+  })}
+</div>)
     
-  );
 }

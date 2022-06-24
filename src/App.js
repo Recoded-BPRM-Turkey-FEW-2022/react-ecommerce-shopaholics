@@ -11,6 +11,7 @@ import ResponsiveAppBar from "./components/Navbar";
 import AllProducts from "./routes/AllProducts";
 import ProductDetail from "./routes/ProductDetail";
 import {getProducts} from "./util/API";
+import Cart from "./routes/Cart"
 
 
 // const queryClient = new QueryClient();
@@ -26,12 +27,14 @@ function App() {
   return (
   //  <QueryClientProvider client={queryClient}>
     <>
+      
+      <Router>
       <ResponsiveAppBar
         searchedName={searchedName}
         setSearchedName={setSearchedName}
         data={data}
       />
-      <Router>
+      
         <Routes>
           <Route
             exact
@@ -46,6 +49,11 @@ function App() {
             exact
             path="/products/:productId"
             element={<ProductDetail />}
+          />
+          <Route
+            exact
+            path="/cart"
+            element={<Cart />}
           />
         </Routes>
       </Router>
